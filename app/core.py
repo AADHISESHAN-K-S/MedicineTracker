@@ -1,5 +1,5 @@
 # global variables
-FILENAME = "records.txt"
+FILEPATH = "data/records.txt"
 
 class Medicine:
     # All medicines from record
@@ -20,7 +20,7 @@ class Medicine:
     def add_new_record(self):
         # try-catch
         line = f"{self.sl_no},{self.name},{self.description},{self.course_duration},{self.current_streak}\n"
-        with open(FILENAME, "a") as R:
+        with open(FILEPATH, "a") as R:
             R.write(line)
 
     @classmethod
@@ -50,7 +50,7 @@ class Medicine:
     @staticmethod
     # rewrites all records
     def update_all_records():
-        with open(FILENAME, "w") as R:
+        with open(FILEPATH, "w") as R:
             for med in meds:
                 line = f"{med.sl_no},{med.name},{med.description},{med.course_duration},{med.current_streak}\n"
                 R.write(line)
@@ -59,8 +59,8 @@ class Medicine:
 
 # miscellaneous functions
 # return list of all lines
-def read_records(FILENAME):
-    with open(FILENAME, "r") as R:
+def read_records(FILEPATH):
+    with open(FILEPATH, "r") as R:
         return R.readlines()
         
 # retreive lines from records and create class objects
@@ -85,7 +85,7 @@ def create_records(records):
 
 # test
 
-# n = create_records(read_records(FILENAME))
+# n = create_records(read_records(FILEPATH))
 # Medicine.display_records()
 
 medicine1 = Medicine(
