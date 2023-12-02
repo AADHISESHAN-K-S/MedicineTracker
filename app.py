@@ -26,6 +26,12 @@ class Medicine:
             R.write(line)
 
     @classmethod
+    # delete a record
+    def deleteRecord(self):
+        # try-catch
+        meds.remove(self)
+
+    @classmethod
     # update values of a medicine
     def updateClassDetails(self, new_name, new_description, new_course_duration, new_current_streak):
         # error possiblity
@@ -37,14 +43,13 @@ class Medicine:
 
 
     @staticmethod
-    # display sl_noe textboxes
+    # display inside textboxes
     def displayRecords():
         for med in Medicine.meds:
             print(med.name+"\t"+med.description)
             print("%3d %3d %3d"%(med.course_duration, med.current_streak, med.remaining))
 
     @staticmethod
-    # update values of all medicines
     # rewrites all records
     def updateAllRecords():
         with open(record_name, "w") as R:
@@ -55,7 +60,6 @@ class Medicine:
 
 
 # miscellaneous functions
-
 # return list of all lines
 def readRecords(record_name):
     with open(record_name, "r") as R:
