@@ -1,7 +1,5 @@
-# import tkinter as t
-
 # global variables
-record_name = "records.txt"
+FILENAME = "records.txt"
 
 class Medicine:
     # All medicines from record
@@ -19,21 +17,21 @@ class Medicine:
 
     @classmethod
     # add new record
-    def addNewRecord(self):
+    def add_new_record(self):
         # try-catch
         line = f"{self.sl_no},{self.name},{self.description},{self.course_duration},{self.current_streak}\n"
-        with open(record_name, "a") as R:
+        with open(FILENAME, "a") as R:
             R.write(line)
 
     @classmethod
     # delete a record
-    def deleteRecord(self):
+    def delete_record(self):
         # try-catch
         meds.remove(self)
 
     @classmethod
     # update values of a medicine
-    def updateClassDetails(self, new_name, new_description, new_course_duration, new_current_streak):
+    def update_details(self, new_name, new_description, new_course_duration, new_current_streak):
         # error possiblity
         self.name = new_name
         self.description = new_description
@@ -44,15 +42,15 @@ class Medicine:
 
     @staticmethod
     # display inside textboxes
-    def displayRecords():
+    def display_records():
         for med in Medicine.meds:
             print(med.name+"\t"+med.description)
             print("%3d %3d %3d"%(med.course_duration, med.current_streak, med.remaining))
 
     @staticmethod
     # rewrites all records
-    def updateAllRecords():
-        with open(record_name, "w") as R:
+    def update_all_records():
+        with open(FILENAME, "w") as R:
             for med in meds:
                 line = f"{med.sl_no},{med.name},{med.description},{med.course_duration},{med.current_streak}\n"
                 R.write(line)
@@ -61,12 +59,12 @@ class Medicine:
 
 # miscellaneous functions
 # return list of all lines
-def readRecords(record_name):
-    with open(record_name, "r") as R:
+def read_records(FILENAME):
+    with open(FILENAME, "r") as R:
         return R.readlines()
         
 # retreive lines from records and create class objects
-def createRecords(records):
+def create_records(records):
     if (len(records) > 0):
         print("Records: ")
         for med in records:
@@ -85,14 +83,10 @@ def createRecords(records):
     print("No Records.")
     return -1
 
-
-# main
-
-
 # test
 
-# n = createRecords(readRecords(record_name))
-# Medicine.displayRecords()
+# n = create_records(read_records(FILENAME))
+# Medicine.display_records()
 
 medicine1 = Medicine(
     sl_no=1,name='newMed1', 
@@ -100,7 +94,7 @@ medicine1 = Medicine(
     course_duration=14, 
     current_streak=3)
 
-medicine1.addNewRecord()
+medicine1.add_new_record()
 
 
 # medicine2 = Medicine('newMed2', 'test2', 24, 3)

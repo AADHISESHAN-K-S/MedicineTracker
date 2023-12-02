@@ -1,3 +1,4 @@
 # exclude virtual environment
 /myvenv
 /__pycache__
+/app/__pycache__
