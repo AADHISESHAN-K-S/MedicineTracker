@@ -3,86 +3,114 @@ try:
 except ModuleNotFoundError:
 	from tkinter import *
 
+# global variables
+TEMP_HEIGHT = 50
+TEMP_WIDTH = 30
 
+"""ROOT"""
 class App(Tk):
 	def __init__(self, parent):
 		Tk.__init__(self, parent)
 		self.parent = parent
-		# self.frames = []
+		self.frames = []
 		self.initialize()
 
 	def initialize(self):
-		
 		self.grid()
 
-		# configuring columns
+		# configuring columns and rows
 		self.columnconfigure(0, weight=1)
 		self.columnconfigure(1, weight=1)
 
-		# configuring rows
 		self.rowconfigure(0, weight=1)
 		self.rowconfigure(1, weight=1)
 
-		# frames
-		medicines_frame = Frame(self)
-		medicines_frame.grid(row=0, column=0)
+		# setting up frames
+		self.medicines_frame = MedicinesFrame(self)
+		self.medicines_frame.initialize()
+		self.medicines_frame.grid(row=0, column=0)
 
-		details_frame = Frame(self)
-		details_frame.grid(row=0, column=1)
+		self.details_frame = DetailsFrame(self)
+		self.details_frame.initialize()
+		self.details_frame.grid(row=0, column=1)
 
-		buttons_frame = Frame(self)
-		buttons_frame.grid(row=1, column=1)
+		self.buttons_frame = ButtonsFrame(self)
+		self.buttons_frame.initialize()
+		self.buttons_frame.grid(row=1, column=1)
 
-		# labels
-		# (will be done automatically by a function that reads all the records)
-		placeholder_label1 = Label(medicines_frame, text="this is a medicine's name")
-		placeholder_label1.grid(row=0, column=0)
-
-		placeholder_label2 = Label(medicines_frame, text="this is a medicine's name")
-		placeholder_label2.grid(row=1, column=0)
-
-		placeholder_label3 = Label(medicines_frame, text="this is a medicine's name")
-		placeholder_label3.grid(row=2, column=0)
-
-		placeholder_label4 = Label(medicines_frame, text="this is a medicine's name")
-		placeholder_label4.grid(row=3, column=0)
-
-		# entry boxes
-		sl_no_entry = Entry(details_frame)
-		sl_no_entry.grid(row=0, column=0)
-
-		name_entry = Entry(details_frame)
-		name_entry.grid(row=0, column=1)
-
-		desc_entry = Entry(details_frame)
-		desc_entry.grid(row=1, column=0, rowspan=2)
-
-		duration_entry = Entry(details_frame)
-		duration_entry.grid(row=1, column=1)
-
-		streak_entry = Entry(details_frame)
-		streak_entry.grid(row=2, column=1)
-
-		# buttons
-		add_btn = Button(buttons_frame, text = "ADD")
-		add_btn.grid(row=0, column=0)
-
-		del_btn = Button(buttons_frame, text = "DELETE")
-		del_btn.grid(row=0, column=1)
-
-		take_btn = Button(buttons_frame, text = "TAKE")
-		take_btn.grid(row=1, columnspan=2)
-
-		miss_btn = Button(buttons_frame, text = "MISS")
-		miss_btn.grid(row=2, columnspan=2)
+		self.frames = self.winfo_children()
 
 
-		# self.frames = self.winfo_children()
+"""Frames"""
+# labels
+class MedicinesFrame(Frame):
+	def __init__(self, parent):
+		Frame.__init__(self, parent, bg = "lime")
+		print("Added: MedicinesFrame")
 
-		# run on resize
+	def initialize(self):
+		self.grid()
+		pass
+
+# entry boxes
+class DetailsFrame(Frame):
+	def __init__(self, parent):
+		Frame.__init__(self, parent, bg = "orange", height=TEMP_HEIGHT, width=TEMP_WIDTH)
+		print("Added: DetailsFrame")
+
+	def initialize(self):
+		self.grid()
+
+		self.sl_no_entry = Entry(self)
+		self.sl_no_entry.grid(row=0, column=0)
+
+		self.name_entry = Entry(self)
+		self.name_entry.grid(row=0, column=1)
+
+		self.desc_entry = Entry(self)
+		self.desc_entry.grid(row=1, column=0, rowspan=2)
+
+		self.duration_entry = Entry(self)
+		self.duration_entry.grid(row=1, column=1)
+
+		self.streak_entry = Entry(self)
+		self.streak_entry.grid(row=2, column=1)
+
+
+# buttons
+class ButtonsFrame(Frame):
+	def __init__(self, parent):
+		Frame.__init__(self, parent, bg = "cyan")
+		print("Added: ButtonsFrame")
+
+	def initialize(self):
+		self.grid()
+		
+		self.add_btn = Button(self, text = "ADD")
+		self.add_btn.grid(row=0, column=0)
+
+		self.del_btn = Button(self, text = "DELETE")
+		self.del_btn.grid(row=0, column=1)
+
+		self.take_btn = Button(self, text = "TAKE")
+		self.take_btn.grid(row=1, columnspan=2)
+
+		self.miss_btn = Button(self, text = "MISS")
+		self.miss_btn.grid(row=2, columnspan=2)
+
+
+
+if __name__ == '__main__':
+	myapp = App(None)
+	myapp.title("Medicine Tracker")
+	myapp.geometry("500x500")
+	myapp.mainloop()
+
+"""later use"""
+"""
+		# scaling
 		self.bind("<Configure>", self.on_resize)
-
-	# scale the font size of widgets upon window resize
+	# scales the font size of widgets upon window resize
 	def on_resize(self, event):
 		new_width = event.width
 		new_height = event.height
@@ -91,7 +119,7 @@ class App(Tk):
 
 		new_font = ("Arial", new_font_size)
 
-		""" optimize """
+		# **CHANGE TO ONLY AFFECT FRAMES** 
 		for frame in self.winfo_children():
 			for widget in frame.winfo_children():
 				# print(widget)
@@ -99,8 +127,25 @@ class App(Tk):
 
 		# debugging
 		# print(f"Window: {new_width}x{new_height}, font_size = {new_font_size}")
+	# appends new Label(medicine name) to medicines_frame
+	def add_medicine(self, med_name):
+		new_label = Label(self.medicines_frame, text=med_name)
+		new_label.pack()
+"""
 
-if __name__ == '__main__':
-	myapp = App(None)
-	myapp.title("Medicine Tracker")
-	myapp.mainloop()
+
+"""
+# labels
+# (will be done automatically by a function that reads all the records)
+placeholder_label1 = Label(medicines_frame, text="this is a medicine's name")
+placeholder_label1.grid(row=0, column=0)
+
+placeholder_label2 = Label(medicines_frame, text="this is a medicine's name")
+placeholder_label2.grid(row=1, column=0)
+
+placeholder_label3 = Label(medicines_frame, text="this is a medicine's name")
+placeholder_label3.grid(row=2, column=0)
+
+placeholder_label4 = Label(medicines_frame, text="this is a medicine's name")
+placeholder_label4.grid(row=3, column=0)
+"""
