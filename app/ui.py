@@ -42,8 +42,8 @@ class App(Tk):
 
 
 	# add new medicine to UI
-	def add_new_medicine(self, name):
-		self.medicines_frame.new_label(name)
+	def add_new_medicine(self, id_value, name_value):
+		self.medicines_frame.new_label(id_value, name_value)
 
 
 """Frames"""
@@ -72,8 +72,8 @@ class MedicinesFrame(Frame):
 		self.heading = Label(self, text="Medicines")
 		self.heading.grid(row=0, column=0, columnspan=2, sticky="ew")
 
-	def new_label(self, value):
-		temp = Label(self, text=value)
+	def new_label(self, id_value, name_value):
+		temp = Label(self, text=name_value)
 		temp.grid(row=self.next_row, column=0, sticky="ew")
 		
 		self.next_row+=1

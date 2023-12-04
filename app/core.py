@@ -17,7 +17,6 @@ class Medicine:
         # add to medicines
         Medicine.meds.append(self)
 
-    @classmethod
     # add new record
     def add_new_record(self):
         # try-catch
@@ -25,13 +24,11 @@ class Medicine:
         with open(FILEPATH, "a") as R:
             R.write(line)
 
-    @classmethod
     # delete a record
     def delete_record(self):
         # try-catch
         meds.remove(self)
 
-    @classmethod
     # update values of a medicine
     def update_details(self, new_name, new_description, new_course_duration, new_current_streak):
         # error possiblity
@@ -95,13 +92,14 @@ def create_records(records):
 def main(app):
     n = create_records(read_records(FILEPATH))
     Medicine.display_records()
-        medicine1 = Medicine(
-        sl_no=1,name='newMed1', 
-        description='test1', 
-        course_duration=14, 
-        current_streak=3)
 
+    # medicine1 = Medicine(
+    # sl_no=1,name='newMed1', 
+    # description='test1', 
+    # course_duration=14, 
+    # current_streak=3)
     # medicine1.add_new_record()
+
     Medicine.push_records(my_app)
 
 
