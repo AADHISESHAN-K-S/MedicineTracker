@@ -61,10 +61,10 @@ class Medicine:
     # put all records in the ui
     def push_records(ui_window):
         for medicine in Medicine.meds:
-            ui_window.add_new_medicine(medicine.name)
+            ui_window.add_new_medicine(medicine.sl_no, medicine.name)
 
 
-# miscellaneous functions
+"""miscellaneous functions"""
 # return list of all lines
 def read_records(FILEPATH):
     with open(FILEPATH, "r") as R:
@@ -90,17 +90,12 @@ def create_records(records):
     print("No Records.")
     return -1
 
-# test
 
-n = create_records(read_records(FILEPATH))
-Medicine.display_records()
-
-if __name__ == '__main__':
-    my_app = ui.App(None)
-    my_app.title("Medicine Tracker")
-    my_app.geometry("500x500")
-
-    medicine1 = Medicine(
+# main
+def main(app):
+    n = create_records(read_records(FILEPATH))
+    Medicine.display_records()
+        medicine1 = Medicine(
         sl_no=1,name='newMed1', 
         description='test1', 
         course_duration=14, 
@@ -108,5 +103,14 @@ if __name__ == '__main__':
 
     # medicine1.add_new_record()
     Medicine.push_records(my_app)
+
+
+
+if __name__ == '__main__':
+    my_app = ui.App(None)
+    my_app.title("Medicine Tracker")
+    my_app.geometry("500x500")
+
+    main(my_app)
 
     my_app.mainloop()
