@@ -1,3 +1,5 @@
+import ui
+
 # global variables
 FILEPATH = "data/records.txt"
 
@@ -55,6 +57,11 @@ class Medicine:
                 line = f"{med.sl_no},{med.name},{med.description},{med.course_duration},{med.current_streak}\n"
                 R.write(line)
 
+    @staticmethod
+    # put all records in the ui
+    def push_records(ui_window):
+        for medicine in Medicine.meds:
+            ui_window.add_new_medicine(medicine.name)
 
 
 # miscellaneous functions
@@ -77,7 +84,7 @@ def create_records(records):
                 description=med[2], 
                 course_duration=med[3], 
                 current_streak=med[4])
-        
+
         return len(records)
 
     print("No Records.")
@@ -85,23 +92,21 @@ def create_records(records):
 
 # test
 
-# n = create_records(read_records(FILEPATH))
-# Medicine.display_records()
+n = create_records(read_records(FILEPATH))
+Medicine.display_records()
 
-medicine1 = Medicine(
-    sl_no=1,name='newMed1', 
-    description='test1', 
-    course_duration=14, 
-    current_streak=3)
+if __name__ == '__main__':
+    my_app = ui.App(None)
+    my_app.title("Medicine Tracker")
+    my_app.geometry("500x500")
 
-medicine1.add_new_record()
+    medicine1 = Medicine(
+        sl_no=1,name='newMed1', 
+        description='test1', 
+        course_duration=14, 
+        current_streak=3)
 
+    # medicine1.add_new_record()
+    Medicine.push_records(my_app)
 
-# medicine2 = Medicine('newMed2', 'test2', 24, 3)
-# medicine3 = Medicine('newMed3', 'test3', 34, 3)
-# medicine4 = Medicine('newMed4', 'test4', 44, 3)
-
-# print(medicine1.remaining)
-# print(medicine2.remaining)
-# print(medicine3.remaining)
-# print(medicine4.remaining)
+    my_app.mainloop()

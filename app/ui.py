@@ -41,11 +41,25 @@ class App(Tk):
 		self.frames = self.winfo_children()
 
 
+	# add new medicine to UI
+	def add_new_medicine(self, name):
+		self.medicines_frame.new_label(name)
+
+
 """Frames"""
+# color_palette = ['bg_color', 'fg_color', dark_bg_color, dark_fg_color]
+
 # labels
 class MedicinesFrame(Frame):
+	
+	color_palette = ['lime', 'white', 'grey', 'white']
+
 	def __init__(self, parent):
-		Frame.__init__(self, parent, bg = "lime")
+		Frame.__init__(self, parent, bg = MedicinesFrame.color_palette[0])
+
+		# arrange elements
+		self.next_row = 1
+
 		print("Added: MedicinesFrame")
 
 	def initialize(self):
@@ -58,10 +72,20 @@ class MedicinesFrame(Frame):
 		self.heading = Label(self, text="Medicines")
 		self.heading.grid(row=0, column=0, columnspan=2, sticky="ew")
 
+	def new_label(self, value):
+		temp = Label(self, text=value)
+		temp.grid(row=self.next_row, column=0, sticky="ew")
+		
+		self.next_row+=1
+
+
 # entry boxes
 class DetailsFrame(Frame):
+	
+	color_palette = ['orange', 'red', 'grey', 'white']
+	
 	def __init__(self, parent):
-		Frame.__init__(self, parent, bg = "orange")
+		Frame.__init__(self, parent, bg = DetailsFrame.color_palette[0])
 		print("Added: DetailsFrame")
 
 	def initialize(self):
@@ -93,8 +117,11 @@ class DetailsFrame(Frame):
 
 # buttons
 class ButtonsFrame(Frame):
+	
+	color_palette = ['cyan', 'darkblue', 'grey', 'white']
+
 	def __init__(self, parent):
-		Frame.__init__(self, parent, bg = "cyan")
+		Frame.__init__(self, parent, bg = ButtonsFrame.color_palette[0])
 		print("Added: ButtonsFrame")
 
 	def initialize(self):
@@ -127,47 +154,3 @@ if __name__ == '__main__':
 	myapp.title("Medicine Tracker")
 	myapp.geometry("500x500")
 	myapp.mainloop()
-
-"""later use"""
-"""
-		# scaling
-		self.bind("<Configure>", self.on_resize)
-	# scales the font size of widgets upon window resize
-	def on_resize(self, event):
-		new_width = event.width
-		new_height = event.height
-
-		new_font_size = max(int(new_width/20), 13)
-
-		new_font = ("Arial", new_font_size)
-
-		# **CHANGE TO ONLY AFFECT FRAMES** 
-		for frame in self.winfo_children():
-			for widget in frame.winfo_children():
-				# print(widget)
-				widget.configure(font=new_font)
-
-		# debugging
-		# print(f"Window: {new_width}x{new_height}, font_size = {new_font_size}")
-	# appends new Label(medicine name) to medicines_frame
-	def add_medicine(self, med_name):
-		new_label = Label(self.medicines_frame, text=med_name)
-		new_label.pack()
-"""
-
-
-"""
-# labels
-# (will be done automatically by a function that reads all the records)
-placeholder_label1 = Label(medicines_frame, text="this is a medicine's name")
-placeholder_label1.grid(row=0, column=0)
-
-placeholder_label2 = Label(medicines_frame, text="this is a medicine's name")
-placeholder_label2.grid(row=1, column=0)
-
-placeholder_label3 = Label(medicines_frame, text="this is a medicine's name")
-placeholder_label3.grid(row=2, column=0)
-
-placeholder_label4 = Label(medicines_frame, text="this is a medicine's name")
-placeholder_label4.grid(row=3, column=0)
-"""
