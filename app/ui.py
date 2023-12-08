@@ -3,6 +3,11 @@ try:
 except ModuleNotFoundError:
 	from tkinter import *
 
+# logger
+from utils import logger as logger_util
+logger = logger_util.setup_logging(__name__)
+logger.info("Start")
+
 # global variables
 TEMP_HEIGHT = 50
 TEMP_WIDTH = 30
@@ -60,7 +65,7 @@ class MedicinesFrame(Frame):
 		# arrange elements
 		self.next_row = 1
 
-		print("Added: MedicinesFrame") # log
+		logger.info("Added: MedicinesFrame") # log
 
 	def initialize(self):
 		self.grid()
@@ -92,7 +97,7 @@ class DetailsFrame(Frame):
 	
 	def __init__(self, parent):
 		Frame.__init__(self, parent, bg = DetailsFrame.color_palette[0])
-		print("Added: DetailsFrame")
+		logger.info("Added: DetailsFrame")
 
 	def initialize(self):
 		self.grid()
@@ -127,7 +132,7 @@ class ButtonsFrame(Frame):
 
 	def __init__(self, parent):
 		Frame.__init__(self, parent, bg = ButtonsFrame.color_palette[0])
-		print("Added: ButtonsFrame")
+		logger.info("Added: ButtonsFrame")
 
 	def initialize(self):
 		self.grid()
