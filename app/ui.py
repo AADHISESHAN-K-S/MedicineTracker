@@ -60,7 +60,7 @@ class MedicinesFrame(Frame):
 		# arrange elements
 		self.next_row = 1
 
-		print("Added: MedicinesFrame")
+		print("Added: MedicinesFrame") # log
 
 	def initialize(self):
 		self.grid()
