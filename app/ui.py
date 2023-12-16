@@ -7,6 +7,9 @@ except ModuleNotFoundError:
 TEMP_HEIGHT = 50
 TEMP_WIDTH = 30
 
+SYMBOL_CROSS = 10007 # ballot symbol
+SYMBOL_CHECK = 10003 # check mark symbol
+
 """ROOT"""
 class App(Tk):
 	def __init__(self, parent):
@@ -124,7 +127,7 @@ class DetailsFrame(Frame):
 class ButtonsFrame(Frame):
 	
 	color_palette = ['cyan', 'darkblue', 'grey', 'white']
-
+	
 	def __init__(self, parent):
 		Frame.__init__(self, parent, bg = ButtonsFrame.color_palette[0])
 		print("Added: ButtonsFrame")
@@ -137,22 +140,11 @@ class ButtonsFrame(Frame):
 		self.columnconfigure(1, weight=1)
 
 		# elements
-		self.heading = Label(self, text="Actions")
-		self.heading.grid(row=0, column=0, sticky="ew", columnspan=2)
+		self.btn_1 = Button(self, text = chr(SYMBOL_CROSS))
+		self.btn_1.grid(row=1, column=0, sticky="new")
 
-		self.add_btn = Button(self, text = "ADD")
-		self.add_btn.grid(row=1, column=0, sticky="ew")
-
-		self.del_btn = Button(self, text = "DELETE")
-		self.del_btn.grid(row=1, column=1, sticky="ew")
-
-		self.take_btn = Button(self, text = "TAKE")
-		self.take_btn.grid(row=2, columnspan=2, sticky="ew")
-
-		self.miss_btn = Button(self, text = "MISS")
-		self.miss_btn.grid(row=3, columnspan=2, sticky="ew")
-
-
+		self.btn_2 = Button(self, text = chr(SYMBOL_CHECK))
+		self.btn_2.grid(row=2, column=0, sticky="ews")
 
 if __name__ == '__main__':
 	myapp = App(None)
