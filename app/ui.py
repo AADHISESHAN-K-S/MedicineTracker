@@ -116,7 +116,7 @@ class DetailsFrame(Frame):
 		self.desc_label.grid(row=2, column=0) # , sticky="ew"
 
 		self.desc_entry = Entry(self)
-		self.desc_entry.grid(row=3, column=0, rowspan=2, sticky="ns")
+		self.desc_entry.grid(row=3, column=0, rowspan=1, sticky="ns")
 
 		# duration
 		self.duration_label = Label(self, text = "Duration")
