@@ -52,7 +52,108 @@ class App(Tk):
 """Frames"""
 # color_palette = ['bg_color', 'fg_color', dark_bg_color, dark_fg_color]
 
-# labels
+# user actions
+class ButtonsFrame(Frame):
+	
+	color_palette = ['cyan', 'darkblue', 'grey', 'white']
+	
+	def __init__(self, parent):
+		Frame.__init__(self, parent, bg = ButtonsFrame.color_palette[0])
+		print("Added: ButtonsFrame")
+
+	def initialize(self):
+		self.grid()
+		
+		# configuring columns and rows
+		self.columnconfigure(0, weight=1)
+		self.columnconfigure(1, weight=1)
+
+		# elements
+		self.btn_1 = Button(self, text = chr(SYMBOL_CROSS))
+		self.btn_1.grid(row=1, column=0, sticky="new")
+
+		self.btn_2 = Button(self, text = chr(SYMBOL_CHECK))
+		self.btn_2.grid(row=2, column=0, sticky="ews")
+
+
+# medicine details
+class DetailsFrame(Frame):
+	
+	color_palette = ['orange', 'red', 'grey', 'white']
+	
+	def __init__(self, parent):
+		Frame.__init__(self, parent, bg = DetailsFrame.color_palette[0])
+		print("Added: DetailsFrame")
+
+	def initialize(self):
+		self.grid()
+		
+		# configuring columns and rows
+		self.columnconfigure(0, weight=1)
+		self.columnconfigure(1, weight=1)
+
+		# elements
+		# frame title
+		self.heading = Label(self, text="Details")
+		self.heading.grid(row=0, column=0, columnspan=2, sticky="ew")
+		
+		# # serial number
+		# self.sl_no_label = Label(self, text = "S.No.")
+		# self.sl_no_label.grid(row=1, column=0) # , sticky="ew"
+
+		# self.sl_no_entry = Entry(self)
+		# self.sl_no_entry.grid(row=1, column=1)
+
+		# name
+		self.name_label = Label(self, text = "Name")
+		self.name_label.grid(row=1, column=0) # , sticky="ew"
+
+		self.name_entry = Entry(self)
+		self.name_entry.grid(row=1, column=1)
+
+		# description
+		self.desc_label = Label(self, text = "Description")
+		self.desc_label.grid(row=2, column=0) # , sticky="ew"
+
+		self.desc_entry = Entry(self)
+		self.desc_entry.grid(row=3, column=0, rowspan=2, sticky="ns")
+
+		# duration
+		self.duration_label = Label(self, text = "Duration")
+		self.duration_label.grid(row=4, column=0) # , sticky="ew"
+
+		self.duration_entry = Entry(self)
+		self.duration_entry.grid(row=5, column=0)
+
+		# current streak (days taken)
+		self.streak_label = Label(self, text = "Streak")
+		self.streak_label.grid(row=6, column=0) # , sticky="ew"
+
+		self.streak_entry = Entry(self)
+		self.streak_entry.grid(row=7, column=0)
+
+		# missed
+		self.missed_label = Label(self, text = "Missed")
+		self.missed_label.grid(row=4, column=1) # , sticky="ew"
+
+		self.missed_entry = Entry(self)
+		self.missed_entry.grid(row=5, column=1)
+
+		# used
+		self.used_label = Label(self, text = "Taken")
+		self.used_label.grid(row=6, column=1) # , sticky="ew"
+
+		self.used_entry = Entry(self)
+		self.used_entry.grid(row=7, column=1)
+
+		# date (default - current)
+		self.date_label = Label(self, text = "Date")
+		self.date_label.grid(row=8, column=0) # , sticky="ew"
+
+		self.date_entry = Entry(self)
+		self.date_entry.grid(row=8, column=1)
+
+# medicine list
 class MedicinesFrame(Frame):
 	
 	color_palette = ['lime', 'white', 'grey', 'white']
@@ -88,63 +189,24 @@ class MedicinesFrame(Frame):
 		self.next_row+=1
 
 
-# entry boxes
-class DetailsFrame(Frame):
-	
-	color_palette = ['orange', 'red', 'grey', 'white']
-	
+# medicine streak
+class StreakFrame(Frame):
+
+	color_palette = ['lime', 'white', 'grey', 'white']
+
 	def __init__(self, parent):
-		Frame.__init__(self, parent, bg = DetailsFrame.color_palette[0])
-		print("Added: DetailsFrame")
+		Frame.__init__(self, parent, bg = StreakFrame.color_palette[0])
+
+		print("Added: StreakFrame")
 
 	def initialize(self):
 		self.grid()
 		
 		# configuring columns and rows
 		self.columnconfigure(0, weight=1)
-		self.columnconfigure(1, weight=1)
 
 		# elements
-		self.heading = Label(self, text="Details")
-		self.heading.grid(row=0, column=0, columnspan=2, sticky="ew")
-		
-		self.sl_no_entry = Entry(self)
-		self.sl_no_entry.grid(row=1, column=0, sticky="ew")
-
-		self.name_entry = Entry(self)
-		self.name_entry.grid(row=1, column=1, sticky="ew")
-
-		self.desc_entry = Entry(self)
-		self.desc_entry.grid(row=2, column=0, rowspan=2, sticky="nsew")
-
-		self.duration_entry = Entry(self)
-		self.duration_entry.grid(row=2, column=1, sticky="ew")
-
-		self.streak_entry = Entry(self)
-		self.streak_entry.grid(row=3, column=1, sticky="ew")
-
-# buttons
-class ButtonsFrame(Frame):
-	
-	color_palette = ['cyan', 'darkblue', 'grey', 'white']
-	
-	def __init__(self, parent):
-		Frame.__init__(self, parent, bg = ButtonsFrame.color_palette[0])
-		print("Added: ButtonsFrame")
-
-	def initialize(self):
-		self.grid()
-		
-		# configuring columns and rows
-		self.columnconfigure(0, weight=1)
-		self.columnconfigure(1, weight=1)
-
-		# elements
-		self.btn_1 = Button(self, text = chr(SYMBOL_CROSS))
-		self.btn_1.grid(row=1, column=0, sticky="new")
-
-		self.btn_2 = Button(self, text = chr(SYMBOL_CHECK))
-		self.btn_2.grid(row=2, column=0, sticky="ews")
+		pass
 
 if __name__ == '__main__':
 	myapp = App(None)
